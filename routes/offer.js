@@ -167,7 +167,9 @@ router.put(
             updateProductDetail(offer, "ÉTAT", req.fields.condition);
             updateProductDetail(offer, "COULEUR", req.fields.color);
             updateProductDetail(offer, "EMPLACEMENT", req.fields.city);
-            console.log(offer.product_details[4]);
+
+            // Notifie Mongoose que l'on a modifié le tableau product_details
+            offer.markModified("product_details");
 
             if (req.files && req.files.picture && req.files.picture.path) {
                 const productImageInformations = await cloudinary.uploader.upload(
@@ -176,8 +178,6 @@ router.put(
                 );
                 offer.product_image = productImageInformations;
             }
-
-            //msgjs21 supprimer anc image
 
             await offer.save();
             res.json(offer);

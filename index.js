@@ -3,7 +3,7 @@ const formidableMiddelware = require("express-formidable");
 const mongoose = require("mongoose");
 const cloudinary = require("cloudinary").v2;
 const cors = require("cors");
-require("dotenv").config();
+require("dotenv").config(); //=> le contenu du fichier .env va se trouver dans les variables d'environnement accessibles via process.env
 
 const app = express();
 

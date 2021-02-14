@@ -203,15 +203,18 @@ router.delete("/offer/delete", isAuthenticated, async (req, res) => {
 
 router.get("/offers", async (req, res) => {
     try {
-        const offersByPage = 10;
         const debug = false;
 
         // Destructuring
-        let { title, priceMin, priceMax, sort, page } = req.query;
+        let { title, priceMin, priceMax, sort, page, limit } = req.query;
 
         if (!Number(page) || page < 1) {
             page = 1;
         }
+        if (!Number(limit) || limit < 1) {
+            limit = 10;
+        }
+        limit = Number(limit);
 
         let filters = {};
         if (title) {
@@ -241,8 +244,8 @@ router.get("/offers", async (req, res) => {
         const offersCount = await Offer.countDocuments(filters);
 
         const offers = await Offer.find(filters)
-            .limit(offersByPage)
-            .skip((page - 1) * offersByPage)
+            .limit(limit)
+            .skip((page - 1) * limit)
             .sort(sortBy)
             .populate(
                 debug ? "" : "owner",

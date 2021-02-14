@@ -203,7 +203,7 @@ router.delete("/offer/delete", isAuthenticated, async (req, res) => {
 
 router.get("/offers", async (req, res) => {
     try {
-        const offersByPage = 5;
+        const offersByPage = 10;
         const debug = false;
 
         // Destructuring

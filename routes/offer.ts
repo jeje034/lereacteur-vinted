@@ -92,7 +92,6 @@ router.post(
                 newOffer.product_image = productImageInformations;
             }
 
-            //msgjs21
             await newOffer.save();
 
             res.status(200).json(newOffer);

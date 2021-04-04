@@ -24,7 +24,7 @@ router.post("/payment", async (req: any, res: Response) => {
 
         // Création la transaction via Stripe
         const response = await stripe.charges.create({
-            amount: Number(amount) * 100, //Montant en centimes. msgjs21 si temps rechercher avec l'id du produit
+            amount: Number(amount) * 100,
             currency: "eur",
             description: productName,
             source: stripeToken,

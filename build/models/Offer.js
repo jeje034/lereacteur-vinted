@@ -1,7 +1,7 @@
-export {};
-const mongoose = require("mongoose");
-
-const Offer = mongoose.model("Offer", {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var mongoose = require("mongoose");
+var Offer = mongoose.model("Offer", {
     product_name: String,
     product_description: String,
     product_price: Number,
@@ -12,5 +12,4 @@ const Offer = mongoose.model("Offer", {
         ref: "User",
     },
 });
-
 module.exports = Offer;

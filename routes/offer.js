@@ -8,8 +8,9 @@ const Offer = require("../models/Offer");
 
 const cloudinary = require("cloudinary").v2;
 const isAuthenticated = require("../middlewares/is-authenticated");
+import { NextFunction, Request, Response } from "express";
 
-const areParametersOK = (req, res, next) => {
+const areParametersOK = (req: any, res: Response, next: NextFunction) => {
     if (req.fields.title && req.fields.title.length > 50) {
         res.status(400).json({
             error: { message: "Le titre est limité à 50 caractères." },
@@ -43,7 +44,7 @@ router.post(
     "/offer/publish",
     isAuthenticated,
     areParametersOK,
-    async (req, res) => {
+    async (req: any, res: Response) => {
         try {
             // Destructuring
             const {
@@ -101,7 +102,11 @@ router.post(
     }
 );
 
-const updateProductDetail = (offer, productDetailId, productDetailValue) => {
+const updateProductDetail = (
+    offer: typeof Offer,
+    productDetailId: string,
+    productDetailValue: string
+) => {
     if (!productDetailValue) {
         return;
     }
@@ -123,7 +128,8 @@ const updateProductDetail = (offer, productDetailId, productDetailValue) => {
     if (position2 >= 0) {
         offer.product_details[position2][productDetailId] = productDetailValue;
     } else {
-        offer.product_details.push(productDetailId) = productDetailValue;
+        //msgjs21 tester : ce ne devait pas marcher avant typescipt
+        offer.product_details.push({ productDetailId: productDetailValue });
     }
 };
 
@@ -131,7 +137,7 @@ router.put(
     "/offer/update",
     isAuthenticated,
     areParametersOK,
-    async (req, res) => {
+    async (req: any, res: Response) => {
         try {
             if (!req.fields._id) {
                 res.status(400).json({
@@ -139,7 +145,9 @@ router.put(
                 });
                 return;
             }
-            let offer = await Offer.findById(req.fields._id).populate("owner");
+            let offer: typeof Offer = await Offer.findById(
+                req.fields._id
+            ).populate("owner");
 
             if (!offer) {
                 res.status(400).json({ error: { message: "Offer not found" } });
@@ -187,21 +195,25 @@ router.put(
     }
 );
 
-router.delete("/offer/delete", isAuthenticated, async (req, res) => {
-    try {
-        const offer = await Offer.findByIdAndDelete(req.query.id);
+router.delete(
+    "/offer/delete",
+    isAuthenticated,
+    async (req: Request, res: Response) => {
+        try {
+            const offer = await Offer.findByIdAndDelete(req.query.id);
 
-        if (offer) {
-            res.status(200).json("Offer removed");
-        } else {
-            res.status(200).json("Offer not found");
+            if (offer) {
+                res.status(200).json("Offer removed");
+            } else {
+                res.status(200).json("Offer not found");
+            }
+        } catch (error) {
+            res.status(400).json({ error: { message: error.message } });
         }
-    } catch (error) {
-        res.status(400).json({ error: { message: error.message } });
     }
-});
+);
 
-router.get("/offers", async (req, res) => {
+router.get("/offers", async (req: any, res: Response) => {
     try {
         const debug = false;
 
@@ -216,7 +228,8 @@ router.get("/offers", async (req, res) => {
         }
         limit = Number(limit);
 
-        let filters = {};
+        //msgjs21 voir avec WCL
+        let filters: any = {};
         if (title) {
             filters.product_name = new RegExp(title, "i");
         }
@@ -231,7 +244,7 @@ router.get("/offers", async (req, res) => {
             }
         }
 
-        let sortBy = {};
+        let sortBy: any = {};
 
         if (sort) {
             if (sort === "price-asc") {
@@ -256,7 +269,7 @@ router.get("/offers", async (req, res) => {
                     ? "product_name product_price"
                     : "product_details product_image.secure_url product_name product_description product_price"
             );
-        result = { count: offersCount, offers: offers };
+        const result = { count: offersCount, offers: offers };
 
         res.status(200).json(result);
     } catch (error) {
@@ -264,7 +277,7 @@ router.get("/offers", async (req, res) => {
     }
 });
 
-router.get("/offer/:id", async (req, res) => {
+router.get("/offer/:id", async (req: Request, res: Response) => {
     try {
         if (req.params.id) {
             let offer = await Offer.findById(req.params.id).populate(

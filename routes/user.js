@@ -1,3 +1,4 @@
+export {};
 const express = require("express");
 const router = express.Router();
 const SHA256 = require("crypto-js/sha256");
@@ -8,13 +9,15 @@ const User = require("../models/User");
 
 const cloudinary = require("cloudinary").v2;
 
+import { Request, Response } from "express";
+
 cloudinary.config({
     cloud_name: "dkr7mhnnq",
     api_key: "295848561264668",
     api_secret: "WmjYOjpUCZc9mP63hecn6j9N4zA",
 });
 
-router.post("/user/signup", async (req, res) => {
+router.post("/user/signup", async (req: any, res: Response) => {
     try {
         if (!req.fields.username || !req.fields.email || !req.fields.password) {
             res.status(400).json({
@@ -71,7 +74,7 @@ router.post("/user/signup", async (req, res) => {
     }
 });
 
-router.post("/user/login", async (req, res) => {
+router.post("/user/login", async (req: any, res: Response) => {
     try {
         const user = await User.findOne({ email: req.fields.email });
         if (

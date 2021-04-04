@@ -1,6 +1,9 @@
+export {};
+import { NextFunction, Response } from "express";
+
 const User = require("../models/User");
 
-const isAuthenticated = async (req, res, next) => {
+const isAuthenticated = async (req: any, res: Response, next: NextFunction) => {
     try {
         if (req.headers.authorization) {
             const user = await User.findOne({

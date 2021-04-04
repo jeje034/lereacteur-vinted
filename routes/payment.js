@@ -1,10 +1,13 @@
+export {};
 const express = require("express");
 const router = express.Router();
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
+import { Request, Response } from "express";
+
 //const Transaction = require("../models/Transaction");
 
-router.post("/payment", async (req, res) => {
+router.post("/payment", async (req: any, res: Response) => {
     try {
         const {
             stripeToken, //Récupération par destructuring du token créé depuis le Frontend via l'API Stripe

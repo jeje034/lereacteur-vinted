@@ -1,11 +1,15 @@
 # Copie du site Vinted - partie serveur
 
-Réalisé en **TypeScript** avec base de données **MongoDB**.
+A été réalisée en JavaScript lors de la formation au Reacteur.
 
-Utilise cloudinary pour le stockage distant des images.
+A été converti en **TypeScript** après la formation. Je n'arrête jamais d'apprendre !
 
-Utilise Stripe pour le paiement en line.
+Il utilise :
 
-Utilise Uid2 et Crypti-js pour l'authentification des utilisateurs.
+-   une base de données MongoDB.
+-   Cloudinary pour le stockage distant des images.
+-   Stripe pour le paiement en ligne.
+-   Uid2 et Crypto-js pour l'authentification des utilisateurs.
+-   Express et Express Formidable pour gérer les requêtes Http
 
-Utilise Epress et Express Formidable pour gérer les requêtes Http.
+Ce projet est configuré pour se déployer automatiquement sur Heroku après chaque push sur GitHub.

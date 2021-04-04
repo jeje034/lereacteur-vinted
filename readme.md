@@ -1,8 +1,8 @@
 # Copie du site Vinted - partie serveur
 
-A été réalisée en JavaScript lors de la formation au Reacteur.
+Ce projet a été réalisé en JavaScript lors de la formation au Reacteur.
 
-A été converti en **TypeScript** après la formation. Je n'arrête jamais d'apprendre !
+Il a ensuite été converti en **TypeScript** après la formation. Je n'arrête jamais d'apprendre !
 
 Il utilise :
 

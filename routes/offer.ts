@@ -128,8 +128,7 @@ const updateProductDetail = (
     if (position2 >= 0) {
         offer.product_details[position2][productDetailId] = productDetailValue;
     } else {
-        //msgjs21 tester : ce ne devait pas marcher avant typescipt
-        offer.product_details.push({ productDetailId: productDetailValue });
+        offer.product_details.push({ [productDetailId]: productDetailValue });
     }
 };
 

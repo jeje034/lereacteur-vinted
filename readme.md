@@ -10,6 +10,6 @@ Il utilise :
 -   Cloudinary pour le stockage distant des images.
 -   Stripe pour le paiement en ligne.
 -   Uid2 et Crypto-js pour l'authentification des utilisateurs.
--   Express et Express Formidable pour gérer les requêtes Http
+-   Express et Express Formidable pour gérer les requêtes Http.
 
 Ce projet est configuré pour se déployer automatiquement sur Heroku après chaque push sur GitHub.

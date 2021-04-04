@@ -36,7 +36,7 @@ const paymentRoutes = require("./routes/payment");
 app.use(paymentRoutes);
 
 app.all("*", (req: Request, res: Response) => {
-    res.status(404).json({ error: { message: "Cette route n'existe pas49" } });
+    res.status(404).json({ error: { message: "Cette route n'existe pas" } });
 });
 
 app.listen(process.env.PORT, () => {

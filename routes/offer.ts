@@ -145,11 +145,27 @@ const updateProductDetail = (
     }
 };
 
+interface iUpdateOfferRequest {
+    fields: {
+        _id: string;
+        title: string;
+        description: string;
+        price: number;
+        brand: string;
+        size: string;
+        condition: string;
+        color: string;
+        city: string;
+    };
+    user: any;
+    files: { picture: any };
+}
+
 router.put(
     "/offer/update",
     isAuthenticated,
     areParametersOK,
-    async (req: any, res: Response) => {
+    async (req: iUpdateOfferRequest, res: Response) => {
         try {
             if (!req.fields._id) {
                 res.status(400).json({

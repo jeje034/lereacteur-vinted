@@ -211,20 +211,35 @@ router.delete(
     }
 );
 
-router.get("/offers", async (req: any, res: Response) => {
+router.get("/offers", async (req: Request, res: Response) => {
     try {
         const debug = false;
 
         // Destructuring
-        let { title, priceMin, priceMax, sort, page, limit } = req.query;
+        let { priceMin, priceMax, sort, page, limit } = req.query;
 
-        if (!Number(page) || page < 1) {
-            page = 1;
+        let pageAsNumber: number;
+        let limitAsNumber: number;
+
+        const title: string = req.query.title as string;
+
+        if (!Number(page)) {
+            pageAsNumber = 1;
+        } else {
+            pageAsNumber = Number(page);
+
+            if (pageAsNumber < 1) {
+                pageAsNumber = 1;
+            }
         }
-        if (!Number(limit) || limit < 1) {
-            limit = 10;
+        if (!Number(limit)) {
+            limitAsNumber = 10;
+        } else {
+            limitAsNumber = Number(limit);
+            if (limitAsNumber < 1) {
+                limitAsNumber = 10;
+            }
         }
-        limit = Number(limit);
 
         //msgjs21 voir avec WCL
         let filters: any = {};
@@ -255,8 +270,8 @@ router.get("/offers", async (req: any, res: Response) => {
         const offersCount = await Offer.countDocuments(filters);
 
         const offers = await Offer.find(filters)
-            .limit(limit)
-            .skip((page - 1) * limit)
+            .limit(limitAsNumber)
+            .skip((pageAsNumber - 1) * limitAsNumber)
             .sort(sortBy)
             .populate(
                 debug ? "" : "owner",

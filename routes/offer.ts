@@ -40,11 +40,25 @@ const areParametersOK = (req: any, res: Response, next: NextFunction) => {
     next();
 };
 
+interface iPublishRequest {
+    fields: {
+        title: string;
+        description: string;
+        price: number;
+        size: string;
+        brand: string;
+        condition: string;
+        city: string;
+        color: string;
+    };
+    user: any;
+    files: { picture: any };
+}
 router.post(
     "/offer/publish",
     isAuthenticated,
     areParametersOK,
-    async (req: any, res: Response) => {
+    async (req: iPublishRequest, res: Response) => {
         try {
             // Destructuring
             const {

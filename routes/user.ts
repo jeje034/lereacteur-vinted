@@ -74,7 +74,11 @@ router.post("/user/signup", async (req: any, res: Response) => {
     }
 });
 
-router.post("/user/login", async (req: any, res: Response) => {
+interface iLoginVinted {
+    fields: { email: string; password: string };
+}
+
+router.post("/user/login", async (req: iLoginVinted, res: Response) => {
     try {
         const user = await User.findOne({ email: req.fields.email });
         if (

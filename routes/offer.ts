@@ -264,7 +264,11 @@ router.get("/offers", async (req: Request, res: Response) => {
             }
         }
 
-        let sortBy: any = {};
+        interface iOfferSortBy {
+            product_price?: string;
+        }
+
+        let sortBy: iOfferSortBy = {};
 
         if (sort) {
             if (sort === "price-asc") {

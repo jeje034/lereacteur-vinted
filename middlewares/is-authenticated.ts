@@ -3,7 +3,16 @@ import { NextFunction, Response } from "express";
 
 const User = require("../models/User");
 
-const isAuthenticated = async (req: any, res: Response, next: NextFunction) => {
+interface iRequestForAuthentication {
+    user: any;
+    headers: any;
+}
+
+const isAuthenticated = async (
+    req: iRequestForAuthentication,
+    res: Response,
+    next: NextFunction
+) => {
     try {
         if (req.headers.authorization) {
             const user = await User.findOne({

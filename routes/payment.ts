@@ -7,7 +7,14 @@ import { Request, Response } from "express";
 
 //const Transaction = require("../models/Transaction");
 
-router.post("/payment", async (req: any, res: Response) => {
+interface iPaymentRequest {
+    fields: {
+        stripeToken: string;
+        amount: number;
+        productName: string;
+    };
+}
+router.post("/payment", async (req: iPaymentRequest, res: Response) => {
     try {
         const {
             stripeToken, //Récupération par destructuring du token créé depuis le Frontend via l'API Stripe

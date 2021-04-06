@@ -17,7 +17,17 @@ cloudinary.config({
     api_secret: "WmjYOjpUCZc9mP63hecn6j9N4zA",
 });
 
-router.post("/user/signup", async (req: any, res: Response) => {
+interface iSignUpVinted {
+    fields: {
+        email: string;
+        password: string;
+        username: string;
+        phone: string;
+    };
+    files: { picture: any };
+}
+
+router.post("/user/signup", async (req: iSignUpVinted, res: Response) => {
     try {
         if (!req.fields.username || !req.fields.email || !req.fields.password) {
             res.status(400).json({

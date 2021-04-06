@@ -241,8 +241,15 @@ router.get("/offers", async (req: Request, res: Response) => {
             }
         }
 
-        //msgjs21 voir avec WCL
-        let filters: any = {};
+        interface iOfferFilters {
+            product_name?: RegExp;
+            product_price?: {
+                $gte?: number;
+                $lte?: number;
+            };
+        }
+
+        let filters: iOfferFilters = {};
         if (title) {
             filters.product_name = new RegExp(title, "i");
         }

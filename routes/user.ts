@@ -9,12 +9,12 @@ const User = require("../models/User");
 
 const cloudinary = require("cloudinary").v2;
 
-import { Request, Response } from "express";
+import { Response } from "express";
 
 cloudinary.config({
-    cloud_name: "dkr7mhnnq",
-    api_key: "295848561264668",
-    api_secret: "WmjYOjpUCZc9mP63hecn6j9N4zA",
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 interface iSignUpVinted {

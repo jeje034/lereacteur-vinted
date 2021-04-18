@@ -1,43 +1,6 @@
-const express = require("express");
-const formidableMiddelware = require("express-formidable");
-const mongoose = require("mongoose");
-const cloudinary = require("cloudinary").v2;
-const cors = require("cors");
-require("dotenv").config(); //=> le contenu du fichier .env va se trouver dans les variables d'environnement accessibles via process.env
+//index.ts a été découpé en index.ts et server.ts afin de pouvoir exécuter les tests avec Jest et Supertest
 
-import { Request, Response } from "express";
-
-const app = express();
-
-app.use(formidableMiddelware());
-app.use(cors());
-
-//console.log(process.env);
-
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true, //Ajout pour éviter un warning car on a un modèle avec unique: true,
-});
-
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
-const userRoutes = require("./routes/user");
-app.use(userRoutes);
-
-const offerRoutes = require("./routes/offer");
-app.use(offerRoutes);
-
-const paymentRoutes = require("./routes/payment");
-app.use(paymentRoutes);
-
-app.all("*", (req: Request, res: Response) => {
-    res.status(404).json({ error: { message: "Cette route n'existe pas" } });
-});
+import { app } from "./sever";
 
 app.listen(process.env.PORT, () => {
     console.log("Server started.");

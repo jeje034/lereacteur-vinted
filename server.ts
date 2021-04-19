@@ -2,7 +2,6 @@
 
 import express, { Application, Request, Response } from "express";
 const formidableMiddelware = require("express-formidable");
-const mongoose = require("mongoose");
 const cloudinary = require("cloudinary").v2;
 const cors = require("cors");
 require("dotenv").config(); //=> le contenu du fichier .env va se trouver dans les variables d'environnement accessibles via process.env
@@ -13,12 +12,6 @@ app.use(formidableMiddelware());
 app.use(cors());
 
 //console.log(process.env);
-
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true, //Ajout pour éviter un warning car on a un modèle avec unique: true,
-});
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,

@@ -37,10 +37,10 @@ test("GET /offer/:id", async () => {
     //const post = await Post.create({ title: "Post 1", content: "Lorem ipsum" });
 
     await request(app)
-        .get("/offer/" + "607d71cc3549ca43b00c127f") //post.id")
+        .get("/offer/" + "607dc23d54cc21359420381e") //post.id")
         .expect(200)
         .then((response) => {
-            expect(response.body._id).toBe("607d71cc3549ca43b00c127f"); //post.id);
+            expect(response.body._id).toBe("607dc23d54cc21359420381e"); //post.id);
             expect(response.body.product_name).toBe("Tongs Roxy bleues");
         });
 });
@@ -51,13 +51,13 @@ test("GET /offers", async () => {
         .expect(200)
         .then((response) => {
             expect(response.body.offers[0]._id).toBe(
-                "607d71cc3549ca43b00c127f"
+                "607dc23d54cc21359420381e"
             );
             expect(response.body.offers[0].product_name).toBe(
                 "Tongs Roxy bleues"
             );
             expect(response.body.offers[1]._id).toBe(
-                "607d71d63549ca43b00c1280"
+                "607dc2bcc198711260e3484c"
             );
             expect(response.body.offers[1].product_name).toBe("Jupe évasée");
         });

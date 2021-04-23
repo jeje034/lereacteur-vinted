@@ -11,5 +11,6 @@ Il utilise :
 -   Stripe pour le paiement en ligne.
 -   Uid2 et Crypto-js pour l'authentification des utilisateurs.
 -   Express et Express Formidable pour gérer les requêtes Http.
+-   Jest et Supertest pour les tests.
 
 Ce projet est configuré pour se déployer automatiquement sur Heroku après chaque push sur GitHub.

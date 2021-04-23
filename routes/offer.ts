@@ -152,7 +152,7 @@ router.put(
             }
             if (req.user._id.toString() !== offer.owner._id.toString()) {
                 res.status(401).json({
-                    error: { message: "Unauthorized133" },
+                    error: { message: "Unauthorized" },
                 });
                 return;
             }

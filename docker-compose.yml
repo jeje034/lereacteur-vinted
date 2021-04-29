@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+    vinted-backend-c01:
+        container_name: vinted-backend-c01
+        image: vinted-backend-01
+        ports:
+            - 3002:3001
+        environment:
+            - PORT=${PORT}
+            - MONGODB_URI=${MONGODB_URI}
+            - CLOUDINARY_CLOUD_NAME=${CLOUDINARY_CLOUD_NAME}
+            - CLOUDINARY_API_KEY=${CLOUDINARY_API_KEY}
+            - CLOUDINARY_API_SECRET=${CLOUDINARY_API_SECRET}
+            - STRIPE_PRIVATE_KEY=${STRIPE_PRIVATE_KEY}

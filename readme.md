@@ -13,4 +13,7 @@ Il utilise :
 -   Express et Express Formidable pour gérer les requêtes Http.
 -   Jest et Supertest pour les tests.
 
-Ce projet est configuré pour se déployer automatiquement sur Heroku après chaque push sur GitHub.
+Ce projet est configuré pour se déployer :
+
+-   automatiquement sur Heroku après chaque push sur GitHub.
+-   manuellement sur Heroku via une image Docker.

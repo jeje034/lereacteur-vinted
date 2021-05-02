@@ -1,5 +1,5 @@
 #Issu de https://modern-javascript.fr/docker-typescript-node-win/
-#mais adapté à npm et version de node changée
+#mais adapté à npm, version de node changée, ajout du .env
 
 ###
 ### Première partie : Compilation du code Typescript
@@ -20,6 +20,9 @@ WORKDIR /usr/src/app
 # On copie les sources compilées depuis la première étape
 COPY --from=tsc-builder /usr/src/app/build ./build
 COPY --from=tsc-builder ["/usr/src/app/package.json", "/usr/src/app/package-lock.json", "./"]
+
+# On copie le .env
+COPY --from=tsc-builder /usr/src/app/.env ./
 
 # Installation des modules de production seulement
 RUN npm install --production

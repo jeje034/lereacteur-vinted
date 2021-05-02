@@ -10,5 +10,5 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 app.listen(process.env.PORT, () => {
-    console.log("Server started.");
+    console.log(`Server started (port ${process.env.PORT}).`);
 });
